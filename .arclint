@@ -1,0 +1,16 @@
+{
+  "linters": {
+    "chmod": {
+      "type": "chmod"
+    },
+    "filename": {
+      "type": "filename"
+    },
+    "merge-conflict": {
+      "type": "merge-conflict"
+    },
+    "spelling": {
+      "type": "spelling"
+    }
+  }
+}
