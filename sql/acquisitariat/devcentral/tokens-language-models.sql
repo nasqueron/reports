@@ -20,5 +20,8 @@ WHERE rev.phid IN (
     SELECT DISTINCT objectPHID
     FROM devcentral_token.token_given
     WHERE tokenPHID = "PHID-TOKN-emoji-3"
+) AND repo.phid NOT IN (
+    -- Ignored repositories for external non-Nasqueron projects
+    "PHID-REPO-lfanwd5oj6hf7gmpzd2s"
 )
 ORDER BY rev.id DESC;
