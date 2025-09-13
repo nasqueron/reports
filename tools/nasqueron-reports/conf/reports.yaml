@@ -1,0 +1,23 @@
+#   -------------------------------------------------------------
+#   Reports configuration
+#   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   Project:        Nasqueron
+#   -------------------------------------------------------------
+
+services:
+  db-B:
+    connector: MariaDB
+    hostname: db-B-001
+    credentials: ops/secrets/dbserver/cluster-B/users/rhyne-wyse
+
+reports:
+  agora-operations-grimoire-older-pages:
+    path: sql/db-B/agora/operations-grimoire-older-pages.sql
+    service: db-B
+
+    format: mediawiki
+    format_options:
+      # Mapping between query columns and table headings
+      cols:
+        page_link: Article
+        age: Age (days)

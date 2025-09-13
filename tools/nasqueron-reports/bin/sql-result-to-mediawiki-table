@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+
+#   -------------------------------------------------------------
+#   SQL result to MediaWiki table
+#   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   Project:        Nasqueron
+#   Description:    Format a SQL query output as a MediaWiki table
+#                   Currently supports MySQL/MariaDB format
+#   Usage:          mysql ... | sql-result-to-mediawiki-table
+#   License:        BSD-2-Clause
+#   -------------------------------------------------------------
+
+
+import sys
+
+from nasqueron_reports.formats import mediawiki
+
+
+#   -------------------------------------------------------------
+#   MySQL client parser
+#   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+def parse_mysql_client_output(stream):
+    """
+    Parse MySQL client tabular output into list of rows.
+    Safer version: assumes MySQL output uses tab as delimiter.
+    """
+    rows = []
+
+    for line in stream.splitlines():
+        line = line.rstrip()
+        if not line:
+            continue
+
+        parts = line.split("\t")
+        rows.append(parts)
+
+    return rows
+
+
+def format_header(header):
+    return header.replace("_", " ").capitalize()
+
+
+def infer_headers_map(headers):
+    """
+    Given a list of raw SQL column names, return a dict mapping
+    to human-friendly MediaWiki table headers.
+
+    Example:
+      ["page_link", "age"] ->
+      {"page_link": "Page link", "age": "Age"}
+    """
+    return {header: format_header(header) for header in headers}
+
+
+#   -------------------------------------------------------------
+#   Application entry point
+#   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+def run():
+    stream = sys.stdin.read()
+
+    rows = parse_mysql_client_output(stream)
+    headers = rows[0]
+    rows = rows[1:]
+
+    options = {
+        "cols": infer_headers_map(headers),
+    }
+
+    output = mediawiki.to_table(headers, rows, options)
+    print(output)
+
+
+if __name__ == "__main__":
+    run()
