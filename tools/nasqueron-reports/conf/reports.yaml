@@ -5,10 +5,21 @@
 #   -------------------------------------------------------------
 
 services:
+  acquisitariat:
+    connector: MySQL
+    hostname: mysql
+    credentials:
+      driver: env
+      variables:
+        username: DB_USERNAME
+        password: DB_PASSWORD
+
   db-B:
     connector: MariaDB
     hostname: db-B-001
-    credentials: ops/secrets/dbserver/cluster-B/users/rhyne-wyse
+    credentials:
+      driver: vault
+      secret: ops/secrets/dbserver/cluster-B/users/rhyne-wyse
 
 reports:
   agora-operations-grimoire-older-pages:
@@ -21,3 +32,17 @@ reports:
       cols:
         page_link: Article
         age: Age (days)
+
+  devcentral-tokens-language-models:
+    path: sql/acquisitariat/devcentral/tokens-language-models.sql
+    service: acquisitariat
+
+    format: mediawiki
+    format_options:
+      # Mapping between query columns and table headings
+      cols:
+        revision: Revision
+        title: Commit title
+        date: Date
+        userName: Author
+        repository: Repository

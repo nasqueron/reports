@@ -11,7 +11,7 @@ import os
 
 import yaml
 
-from nasqueron_reports.credentials import vault
+from nasqueron_reports.credentials import resolve_credentials
 from nasqueron_reports.errors import NasqueronReportConfigError
 
 
@@ -90,8 +90,7 @@ def inject_service_config(config, report_config):
         )
 
     if "credentials" in report_config["service_options"]:
-        secret_path = report_config["service_options"]["credentials"]
-        credentials = vault.fetch_credentials(secret_path)
+        credentials = resolve_credentials(report_config["service_options"]["credentials"])
     else:
         credentials = {}
 
