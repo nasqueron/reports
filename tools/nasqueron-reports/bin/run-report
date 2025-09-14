@@ -11,42 +11,9 @@
 
 import sys
 
+from nasqueron_reports.actions.reports import generate_report
 from nasqueron_reports.config import parse_report_config
-from nasqueron_reports.connectors import db_mysql
 from nasqueron_reports.errors import *
-from nasqueron_reports.formats import mediawiki
-
-
-#   -------------------------------------------------------------
-#   Connectors wiring
-#   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-
-def fetch_mysql_report(config):
-    try:
-        return db_mysql.fetch_report(config)
-    except NasqueronReportDatabaseError as e:
-        print(f"An error occurred at database level: {e}", file=sys.stderr)
-        sys.exit(8)
-    except NasqueronReportQueryError as e:
-        print(e, file=sys.stderr)
-        sys.exit(4)
-
-
-CONNECTORS_MAP = {
-    "MariaDB": fetch_mysql_report,
-    "MySQL": fetch_mysql_report,
-}
-
-
-#   -------------------------------------------------------------
-#   Formatters wiring
-#   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-
-FORMATS_MAP = {
-    "mediawiki": mediawiki.to_table,
-}
 
 
 #   -------------------------------------------------------------
@@ -54,50 +21,21 @@ FORMATS_MAP = {
 #   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-def wire(report_config):
-    if "connector" not in report_config["service_options"]:
-        service_name = report_config["service"]
-        print(
-            f"Service connector missing in configuration for service {service_name}",
-            file=sys.stderr,
-        )
-        sys.exit(16)
-
-    if "format" not in report_config:
-        print(f"Format missing in report configuration", file=sys.stderr)
-        sys.exit(16)
-
-    report_connector = report_config["service_options"]["connector"]
-    if report_connector not in CONNECTORS_MAP:
-        print(f"Unknown connector: {report_connector}", file=sys.stderr)
-        sys.exit(32)
-
-    report_format = report_config["format"]
-    if report_format not in FORMATS_MAP:
-        print(f"Unknown format: {report_format}", file=sys.stderr)
-        sys.exit(32)
-
-    return CONNECTORS_MAP[report_connector], FORMATS_MAP[report_format]
-
-
-def generate_report(report_config):
-    connector_cb, format_cb = wire(report_config)
-
-    headers, rows = connector_cb(report_config)
-
-    format_options = report_config["format_options"]
-    return format_cb(headers, rows, format_options)
-
-
 def run(report_name):
     try:
         report_config = parse_report_config(report_name)
+        report = generate_report(report_config)
     except NasqueronReportConfigError as e:
         print(e, file=sys.stderr)
         sys.exit(2)
+    except NasqueronReportQueryError as e:
+        print(e, file=sys.stderr)
+        sys.exit(4)
+    except NasqueronReportDatabaseError as e:
+        print(f"An error occurred at database level: {e}", file=sys.stderr)
+        sys.exit(8)
 
-    output = generate_report(report_config)
-    print(output)
+    print(report.formatted)
 
 
 if __name__ == "__main__":

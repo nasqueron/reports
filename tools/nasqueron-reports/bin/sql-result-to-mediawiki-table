@@ -13,6 +13,7 @@
 
 import sys
 
+from nasqueron_reports import RawReport
 from nasqueron_reports.formats import mediawiki
 
 
@@ -62,16 +63,14 @@ def infer_headers_map(headers):
 
 def run():
     stream = sys.stdin.read()
-
     rows = parse_mysql_client_output(stream)
-    headers = rows[0]
-    rows = rows[1:]
 
+    report = RawReport(headers=rows[0], rows=rows[1:])
     options = {
-        "cols": infer_headers_map(headers),
+        "cols": infer_headers_map(report.headers),
     }
 
-    output = mediawiki.to_table(headers, rows, options)
+    output = mediawiki.to_table(report, options)
     print(output)
 
 

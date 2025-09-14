@@ -26,16 +26,16 @@ def to_rows(rows):
     return [line for lines in mediawiki_rows for line in lines]
 
 
-def to_table(columns_names, rows, options):
+def to_table(report, options):
     """Format query result as MediaWiki table."""
     today = date.today().isoformat()
     lines = ['{| class="wikitable sortable"', f"|+ {today} report", "|-"]
 
     columns_map = options.get("cols", {})
-    headers = [columns_map.get(c, c) for c in columns_names]
+    headers = [columns_map.get(c, c) for c in report.headers]
     lines.append("! " + " !! ".join(headers))
 
-    lines.extend(to_rows(rows))
+    lines.extend(to_rows(report.rows))
 
     lines.append("|}")
 
