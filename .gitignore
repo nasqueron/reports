@@ -1,2 +1,4 @@
+# Python artifacts
+__pycache__/
 *.egg-info/
 tools/*/dist/
