@@ -1,0 +1,22 @@
+wiki:
+  credentials:
+    driver: vault
+    secret: agora
+
+reports:
+  - report: devcentral-token-language-models
+    tool: fetch
+    tool_options:
+      url: https://docker-002.nasqueron.org/reports/devcentral-tokens-language-models.txt
+    page: AI content
+    tweaks:
+      - compute-hash-ignoring-date
+
+  - report: agora-operations-grimoire-older-pages
+    tool: nasqueron-reports
+    tool_options:
+      vault_credentials: /usr/local/etc/secrets/rhyne-wise.yaml
+    page: Operations grimoire/Old content report
+    tweaks:
+      - compute-hash-first-column
+      - update-at-least-monthly

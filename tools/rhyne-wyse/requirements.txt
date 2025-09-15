@@ -1,0 +1,4 @@
+hvac~=2.3.0
+nasqueron-reports~=0.1.0
+pywikibot~=10.4.0
+PyYAML~=6.0.2
