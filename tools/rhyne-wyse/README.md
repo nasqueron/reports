@@ -33,7 +33,7 @@ The following options are available:
    - report: the name of the report to update
    - tool: the name of the tool to use to update the report
      - nasqueron-reports: Use the Nasqueron Reports package
-     - fetch: fetch an already generated report at a specific URL  
+     - fetch: fetch an already generated report at a specific URL
    - tool_options: the options to pass to the tool
    - page: the wiki page to update
    - tweaks: a list of tweaks to decide when to update
