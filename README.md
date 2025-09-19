@@ -22,6 +22,10 @@ Tools and utilities to work with reports are located in the tools/ folder:
   allows run the MariaDB or MySQL query and format
   the result as expected, like as a MediaWiki table
 
+* **[secretsmith](tools/secretsmith/README.md)**:
+  wrapper around the hvac library to get secrets from Vault or OpenBao,
+  allow to authenticate with token or AppRole
+
 ### Contribute
 
 This repository is intended to behave as a monorepo for reporting.

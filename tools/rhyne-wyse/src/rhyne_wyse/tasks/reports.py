@@ -9,6 +9,7 @@
 from typing import Dict
 
 import requests
+import yaml
 
 from nasqueron_reports.actions.reports import generate_report
 from nasqueron_reports.config import parse_report_config
@@ -24,8 +25,7 @@ from rhyne_wyse.utils.hashes import *
 
 def prepare_report(report_options: Dict) -> Report:
     if report_options["tool"] == "nasqueron-reports":
-        report_config = parse_report_config(report_options["report"])
-        return generate_report(report_config)
+        return generate_nasqueron_report(report_options)
     elif report_options["tool"] == "fetch":
         return fetch_report(report_options)
 
@@ -55,6 +55,35 @@ def needs_report_update(site, page_title, report: Report, tweaks: List) -> bool:
             write_hash_to_datastore(page_title, report_hash)
 
     return to_update
+
+
+#   -------------------------------------------------------------
+#   Call Nasqueron Reports to generate a report
+#   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+def parse_nasqueron_report_config(report_options):
+    tool_options = report_options.get("tool_options", {})
+    vault_credentials = tool_options.get("vault_credentials", None)
+
+    if vault_credentials is not None:
+        try:
+            with open(vault_credentials) as fd:
+                return {
+                    "vault": yaml.safe_load(fd),
+                }
+        except PermissionError:
+            # Allow running the bot under a user account too
+            pass
+
+    return {}
+
+
+def generate_nasqueron_report(report_options):
+    extra_config = parse_nasqueron_report_config(report_options)
+    report_config = parse_report_config(report_options["report"], extra_config)
+
+    return generate_report(report_config)
 
 
 #   -------------------------------------------------------------

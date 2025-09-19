@@ -1,7 +1,10 @@
 wiki:
   credentials:
     driver: vault
-    secret: agora
+    vault_credentials: /usr/local/etc/secrets/rhyne-wyse.yaml
+
+    mount_point: apps
+    secret_path: rhyne-wyse/agora
 
 reports:
   - report: devcentral-token-language-models

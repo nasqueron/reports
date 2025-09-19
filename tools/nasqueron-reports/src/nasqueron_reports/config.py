@@ -101,13 +101,16 @@ def inject_service_config(config, report_config):
     report_config["service_options"]["credentials"] = credentials
 
 
-def parse_report_config(report_name):
+def parse_report_config(report_name, extra_config=None):
     config = get_config()
 
     try:
         report_config = config["reports"][report_name]
     except KeyError:
         raise NasqueronReportConfigError(f"Report not found: {report_name}")
+
+    if extra_config:
+        config.update(extra_config)
 
     inject_service_config(config, report_config)
 

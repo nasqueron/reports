@@ -46,3 +46,12 @@ reports:
         date: Date
         userName: Author
         repository: Repository
+
+#   -------------------------------------------------------------
+#   Secretsmith configuration
+#   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+vault:
+  server:
+    url: https://172.27.27.7:8200
+    verify: /usr/local/share/certs/nasqueron-vault-ca.crt

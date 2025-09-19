@@ -7,25 +7,13 @@
 #   -------------------------------------------------------------
 
 
-import hvac
+from secretsmith.vault.client import from_config as client_from_config
+from secretsmith.vault.secrets import read_secret
+from secretsmith.vault.utils import split_path
 
 
-VAULT_CA_CERTIFICATE = "/usr/local/share/certs/nasqueron-vault-ca.crt"
+def fetch_credentials(vault_config, full_secret_path):
+    vault_client = client_from_config(vault_config)
 
-
-def fetch_credentials(secret_path):
-    vault_client = hvac.Client(
-        verify=VAULT_CA_CERTIFICATE,
-    )
-
-    tokens = secret_path.split("/")
-    secret_mount = tokens[0]
-    secret_path = "/".join(tokens[1:])
-
-    secret = vault_client.secrets.kv.read_secret_version(
-        mount_point=secret_mount,
-        path=secret_path,
-        raise_on_deleted_version=True,
-    )
-
-    return secret["data"]["data"]
+    mount_point, secret_path = split_path(full_secret_path)
+    return read_secret(vault_client, mount_point, secret_path)

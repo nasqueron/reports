@@ -18,12 +18,13 @@ from nasqueron_reports.errors import NasqueronReportConfigError
 #   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-def resolve_credentials(config):
-    if config["driver"] == "vault":
-        return vault.fetch_credentials(config["secret"])
+def resolve_credentials(full_config, credentials_config):
+    if credentials_config["driver"] == "vault":
+        vault_config = full_config.get("vault", {})
+        return vault.fetch_credentials(vault_config, credentials_config["secret"])
 
-    if config["driver"] == "env":
-        variables = config.get("variables", {})
+    if credentials_config["driver"] == "env":
+        variables = credentials_config.get("variables", {})
         return read_environment(variables)
 
     raise NasqueronReportConfigError("Credentials driver parameter is missing")

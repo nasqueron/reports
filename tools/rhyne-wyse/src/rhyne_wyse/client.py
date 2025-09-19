@@ -27,8 +27,7 @@ def fetch_credentials(credentials_config: Dict) -> Dict:
         raise ValueError("Missing config key: wiki.credentials.driver")
 
     if driver == "vault":
-        client = vault.connect_to_vault()
-        return vault.read_app_secret(client, credentials_config["secret"])
+        return vault.read_app_secret(credentials_config)
 
     raise ValueError(f"Unknown credentials driver: {driver}")
 
