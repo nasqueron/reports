@@ -14,5 +14,6 @@ FROM
 WHERE
     LEFT(page_title, 20) = "Operations_grimoire/"
     AND LEFT(page_title, 29) != "Operations_grimoire/Incidents"
+    AND page_is_redirect = 0
 HAVING age > 180
-ORDER BY page_touched DESC;
+ORDER BY page_touched DESC, page_title ASC;
