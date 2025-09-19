@@ -7,16 +7,21 @@
 #   -------------------------------------------------------------
 
 
+from typing import List, Any
+
+
 class RawReport:
     """The report fetched from the datasource"""
-    def __init__(self, headers=None, rows=None):
+
+    def __init__(self, headers: Any = None, rows: List[Any] = None):
         self.headers = headers
         self.rows = rows
 
 
 class Report:
     """The report with access to raw report and formatted version"""
-    def __init__(self, raw=None, formatted=None):
+
+    def __init__(self, raw: RawReport | None = None, formatted: str = None):
         if raw is None:
             self.raw = RawReport()
         else:
