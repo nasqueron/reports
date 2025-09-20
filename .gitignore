@@ -8,3 +8,6 @@ tools/rhyne-wyse/logs/
 tools/rhyne-wyse/apicache/
 *.lwp
 throttle.ctrl
+
+# Sphinx
+_build/
