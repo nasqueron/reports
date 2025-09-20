@@ -31,7 +31,7 @@ DEFAULT_CONFIG_PATHS = [
 DEFAULT_SQL_PATHS = [
     ".",
     "/usr/local/share/nasqueron-reports",
-    "/usr/share/nasqueron-reports"
+    "/usr/share/nasqueron-reports",
 ]
 
 
@@ -61,7 +61,9 @@ def get_config():
     config_path = get_config_path()
 
     if not config_path:
-        raise NasqueronReportConfigError("You need to create a reports.yaml config file")
+        raise NasqueronReportConfigError(
+            "You need to create a reports.yaml config file"
+        )
 
     with open(config_path) as fd:
         config = yaml.safe_load(fd)
@@ -90,7 +92,9 @@ def inject_service_config(config, report_config):
         )
 
     if "credentials" in report_config["service_options"]:
-        credentials = resolve_credentials(report_config["service_options"]["credentials"])
+        credentials = resolve_credentials(
+            config, report_config["service_options"]["credentials"]
+        )
     else:
         credentials = {}
 

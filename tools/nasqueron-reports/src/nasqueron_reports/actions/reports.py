@@ -51,7 +51,9 @@ FORMATS_MAP = {
 def wire(report_config):
     if "connector" not in report_config["service_options"]:
         service_name = report_config["service"]
-        raise NasqueronReportConfigError(f"Service connector missing in configuration for service {service_name}")
+        raise NasqueronReportConfigError(
+            f"Service connector missing in configuration for service {service_name}"
+        )
 
     if "format" not in report_config:
         raise NasqueronReportConfigError(f"Format missing in report configuration")

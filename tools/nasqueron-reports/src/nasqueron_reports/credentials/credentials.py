@@ -35,4 +35,4 @@ def resolve_credentials(config):
 
 
 def read_environment(variables):
-    return {k:os.environ.get(v, "") for k, v in variables.items()}
+    return {k: os.environ.get(v, "") for k, v in variables.items()}
