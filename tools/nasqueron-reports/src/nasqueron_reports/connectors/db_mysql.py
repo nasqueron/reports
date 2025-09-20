@@ -42,8 +42,7 @@ def extract_database(query):
 
 
 def parse_statements(query):
-    """Parse SELECT or USE; SELECT; statements.
-    as a main SELECT query and a database."""
+    """Parse SELECT or USE/SELECT statements as a main SELECT query and a database."""
     statements = split_statements(query)
 
     n = len(statements)
