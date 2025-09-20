@@ -1,5 +1,5 @@
 #   -------------------------------------------------------------
-#   Rhyne-Wise :: Wiki :: Page
+#   Rhyne-Wyse :: Wiki :: Page
 #   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   Project:        Nasqueron
 #   Description:    Helper functions to interact with pages on the wiki

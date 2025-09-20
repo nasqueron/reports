@@ -15,7 +15,7 @@ reports:
   - report: agora-operations-grimoire-older-pages
     tool: nasqueron-reports
     tool_options:
-      vault_credentials: /usr/local/etc/secrets/rhyne-wise.yaml
+      vault_credentials: /usr/local/etc/secrets/rhyne-wyse.yaml
     page: Operations grimoire/Old content report
     tweaks:
       - compute-hash-first-column

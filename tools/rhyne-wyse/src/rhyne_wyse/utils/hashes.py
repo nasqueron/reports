@@ -1,5 +1,5 @@
 #   -------------------------------------------------------------
-#   Rhyne-Wise :: Utilities :: Hashes
+#   Rhyne-Wyse :: Utilities :: Hashes
 #   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   Project:        Nasqueron
 #   License:        BSD-2-Clause

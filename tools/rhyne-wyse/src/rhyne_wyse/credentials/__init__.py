@@ -1,5 +1,5 @@
 #   -------------------------------------------------------------
-#   Rhyne-Wise
+#   Rhyne-Wyse
 #   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   Project:        Nasqueron
 #   License:        Trivial work, not eligible to copyright

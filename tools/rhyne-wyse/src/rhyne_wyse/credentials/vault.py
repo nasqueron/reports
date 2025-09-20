@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 #   -------------------------------------------------------------
-#   Rhyne-Wise :: Credentials :: Vault
+#   Rhyne-Wyse :: Credentials :: Vault
 #   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   Project:        Nasqueron
 #   Description:    Fetch credentials from Vault

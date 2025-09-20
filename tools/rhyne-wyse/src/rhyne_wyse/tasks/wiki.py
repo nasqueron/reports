@@ -1,5 +1,5 @@
 #   -------------------------------------------------------------
-#   Rhyne-Wise :: Tasks :: Wiki
+#   Rhyne-Wyse :: Tasks :: Wiki
 #   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   Project:        Nasqueron
 #   License:        BSD-2-Clause

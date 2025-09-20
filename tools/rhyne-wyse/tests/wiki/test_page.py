@@ -1,5 +1,5 @@
 #   -------------------------------------------------------------
-#   Rhyne-Wise :: Tests :: Wiki :: Page
+#   Rhyne-Wyse :: Tests :: Wiki :: Page
 #   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   Project:        Nasqueron
 #   License:        BSD-2-Clause

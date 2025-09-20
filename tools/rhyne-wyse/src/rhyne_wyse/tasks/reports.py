@@ -1,5 +1,5 @@
 #   -------------------------------------------------------------
-#   Rhyne-Wise :: Tasks :: Reports
+#   Rhyne-Wyse :: Tasks :: Reports
 #   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   Project:        Nasqueron
 #   License:        BSD-2-Clause

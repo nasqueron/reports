@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 #   -------------------------------------------------------------
-#   Rhyne-Wise
+#   Rhyne-Wyse
 #   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #   Project:        Nasqueron
 #   Description:    Pywikibot configuration
