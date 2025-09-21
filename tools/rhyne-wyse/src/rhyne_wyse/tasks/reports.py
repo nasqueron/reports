@@ -69,9 +69,7 @@ def parse_nasqueron_report_config(report_options):
     if vault_credentials is not None:
         try:
             with open(vault_credentials) as fd:
-                return {
-                    "vault": yaml.safe_load(fd),
-                }
+                return yaml.safe_load(fd)
         except PermissionError:
             # Allow running the bot under a user account too
             pass
